@@ -1,0 +1,15 @@
+{
+  "name": "bio-geolocation",
+  "version": "0.0.1",
+  "description": "Looks up geolocations from genbank and adds them to a fasta file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Stewart",
+  "license": "WTFPL",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "xml-to-json-promise": "0.0.3"
+  }
+}
