@@ -28,5 +28,6 @@ npm install
 node scraper
 ```
   
-Author: Mathew Stewart https://github.com/matthewstewart
-Author: Paul Kruger    https://github.com/miamiruby
+Authors:  
+Matthew Stewart https://github.com/matthewstewart  
+Paul Kruger    https://github.com/miamiruby
