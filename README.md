@@ -1,5 +1,6 @@
 # Fasta NCBI Web Scraper
-A command line interface for adding data from NCBI to Fasta(.fas) files.
+A command line interface for adding data from NCBI to Fasta(.fas) files.  
+WORK IN PROGRESS... 
 
 ## Requirements
 [Node JS](https://nodejs.org/en/download/) and [Git](https://git-scm.com/downloads) are required to clone, install and run this project.
