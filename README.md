@@ -1,5 +1,6 @@
-Bio-Geolocation with GenBank and Fasta files
+Bio-Geolocation with GenBank and Fasta files [![Build Status](https://travis-ci.org/omnicoders/bio-geolocation.svg?branch=master)](https://travis-ci.org/omnicoders/bio-geolocation)
 ============
+
 
 Looks up the location of sequences in GenBank and adds it to a FASTA file. - https://omnicoders.org/
 
