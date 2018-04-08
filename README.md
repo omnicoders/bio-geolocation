@@ -1,5 +1,5 @@
 Bio-Geolocation with GenBank and Fasta files
-=========
+==========
 
 Work In Progress - Looks up the location of sequences in GenBank and adds it to a FASTA file.
 
