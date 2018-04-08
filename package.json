@@ -1,13 +1,27 @@
 {
   "name": "bio-geolocation",
-  "version": "0.0.1",
-  "description": "Looks up geolocations from genbank and adds them to a fasta file.",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Parses Fasta file and pulls data from GenBank",
+  "main": "scrape.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter spec",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omnicoders/bio-geolocation.git"
+  },
+  "keywords": [
+    "Genbank",
+    "Fasta",
+    "node"
+  ],
   "author": "Matthew Stewart",
   "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/omnicoders/bio-geolocation/issues"
+  },
+  "homepage": "https://github.com/omnicoders/bio-geolocation#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
@@ -20,6 +34,8 @@
     "xpath": "0.0.27"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.5",
     "pryjs": "^1.0.3"
   }
 }
