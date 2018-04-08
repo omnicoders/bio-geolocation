@@ -44,6 +44,7 @@ async function scrapeRecords() {
 		let srcJsonArray = convertFastaFileToJSON(config.srcFilePath);
 		for(let i = 0; i < srcJsonArray.length; i++){
 			let record = srcJsonArray[i];
+			console.log(`scraping ${i + 1}/${srcJsonArray.length} - ${record.assession}`);
 			let country = await getCountry(record.assession);
 		}
 		//console.log(srcJsonArray[1]);
@@ -141,11 +142,10 @@ function convertFastaFileToJSON(srcFilePath){
 async function getCountry(assession) {
 	try {
 		let url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=${assession}&rettype=json`;
-		console.log(`scraping ${assession}`);
 		let response = await axios.get(url);
 		let xml = response.data;
-		console.log(`scraping ${assession} complete`);
-		console.log(`converting xml response to JSON...`);
+		//console.log(`scraping ${assession} complete`);
+		//console.log(`converting xml response to JSON...`);
 		
 		// XML Conversion
 		const convert = require('xml-to-json-promise');
@@ -153,12 +153,38 @@ async function getCountry(assession) {
 		//console.log(convertedData);
 
 		/* TODO: Parse For Country */
-		// if(
-		// 	convertedData['Bioseq-set'] &&
-		// 	convertedData['Bioseq-set']['Bioseq-set_seq-set'] &&
-		// 	convertedData['Bioseq-set']['Bioseq-set_seq-set'][0] &&
+		let isSingleFormat = false;
+		let isSetFormat    = false;
 
-		// )
+		if(
+			convertedData['Bioseq-set'] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'][0] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'][0]['Seq-entry'] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'][0]['Seq-entry'] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'][0]['Seq-entry'][0] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'][0]['Seq-entry'][0]['Seq-entry_seq']
+		){
+			isSingleFormat = true;
+		} else if(
+			convertedData['Bioseq-set'] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'][0] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'][0]['Seq-entry'] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'][0]['Seq-entry'] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'][0]['Seq-entry'][0] &&
+			convertedData['Bioseq-set']['Bioseq-set_seq-set'][0]['Seq-entry'][0]['Seq-entry_set']			
+		){
+			isSetFormat = true;
+		} else {
+			console.log('Error: Unsupported Response Format');
+		}
+
+		if(isSingleFormat) {
+			console.log(`${assession} is single format`);
+		} else if(isSetFormat) {
+			console.log(`${assession} is set format`);
+		}
 
 	} catch(error) {
 		//console.log(error);
