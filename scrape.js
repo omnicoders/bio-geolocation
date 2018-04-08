@@ -2,6 +2,8 @@
 const fs = require('fs');
 const axios = require('axios');
 
+const fasta = require('./fasta.js');
+
 // Add debugger
 // eval(pry.it) to pause execution
 // https://github.com/blainesch/pry.js
@@ -39,7 +41,9 @@ async function scrapeGeolocations() {
 		}
 
 		// convert source file to JSON
-		let srcJSONArray = convertFastaFileToJSON(srcFilePath);
+		//let srcJSONArray = convertFastaFileToJSON(srcFilePath);
+		let srcJSONArray = fasta(srcFilePath);
+
                 if (debug == true) { console.log('converted source file'); }
 
 		// scrape from JSON
@@ -115,7 +119,6 @@ async function convertXMLToJSON(xml) {
 		if(isSeq){
 			if (debug == true) { console.log('obj is a seq'); }
 			record = convertedData['Bioseq-set']['Bioseq-set_seq-set'][0]['Seq-entry'][0]['Seq-entry_seq'][0]['Bioseq'][0];
-			eval(pry.it);
 			if (debug == true) { console.log('record: ' + record); }
 			//console.log('hmm : ' + record['Bioseq_id'][0]['Seq-id'][0]['Seq-id_genbank'][0]['Textseq-id'][0]);
 
