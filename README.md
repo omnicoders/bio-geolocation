@@ -1,5 +1,5 @@
 Bio-Geolocation with GenBank and Fasta files
-===========
+============
 
 Looks up the location of sequences in GenBank and adds it to a FASTA file. - https://omnicoders.org/
 
