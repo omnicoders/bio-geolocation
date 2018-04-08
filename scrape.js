@@ -41,7 +41,6 @@ async function scrapeGeolocations() {
 		}
 
 		// convert source file to JSON
-		//let srcJSONArray = convertFastaFileToJSON(srcFilePath);
 		let srcJSONArray = fasta(srcFilePath);
 
                 if (debug == true) { console.log('converted source file'); }
@@ -206,30 +205,4 @@ async function convertXMLToJSON(xml) {
 		process.exit();
 	}
 	if (debug == true) { console.log('end convertXMLToJSON'); }
-}
-
-function convertFastaFileToJSON(srcFilePath){
-        if (debug == true) { console.log('convertFastaFileToJSON'); }
-	const srcFile = fs.readFileSync(srcFilePath, "utf8");
-	let jsonSrcArray = [];
-	let srcArray = srcFile.split('>');
-	for(let i = 0; i < srcArray.length; i++){
-		let record = srcArray[i];
-		if(record.length > 10){
-			let recordArray = record.split('.1');
-			let assession = recordArray[0].trim();
-			let description = recordArray[1];
-			if(description && description.length > 0){
-				let descriptionArray = description.split(' ');
-				let name = `${descriptionArray[1]} ${descriptionArray[2]}`;
-				let jsonObj = {
-					assession: assession,
-					name: name
-				};
-				jsonSrcArray.push(jsonObj);
-			}
-		}
-	}
-        if (debug == true && show_data == true) { console.log('end convertFastaFileToJSON :'+ jsonSrcArray); }
-	return jsonSrcArray;
 }
