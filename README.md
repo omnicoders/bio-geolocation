@@ -1,4 +1,4 @@
-Bio-Geolocation with GenBank and Fasta files [![Build Status](https://travis-ci.org/omnicoders/bio-geolocation.svg?branch=master)](https://travis-ci.org/omnicoders/bio-geolocation)
+Bio-Geolocation with GenBank and Fasta files [![Build Status](https://travis-ci.org/omnicoders/bio-geolocation.svg?branch=master)](https://travis-ci.org/omnicoders/bio-geolocation) [![Coverage Status](https://coveralls.io/repos/github/omnicoders/bio-geolocation/badge.svg?branch=master)](https://coveralls.io/github/omnicoders/bio-geolocation?branch=master)
 ============
 
 
