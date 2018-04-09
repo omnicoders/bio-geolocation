@@ -1,0 +1,41 @@
+[
+  {
+    "SubSource_subtype": [
+      {
+        "_": "3",
+        "$": {
+          "value": "clone"
+        }
+      }
+    ],
+    "SubSource_name": [
+      "PT_02"
+    ]
+  },
+  {
+    "SubSource_subtype": [
+      {
+        "_": "23",
+        "$": {
+          "value": "country"
+        }
+      }
+    ],
+    "SubSource_name": [
+      "USA: Montana, Gallatin National Forest"
+    ]
+  },
+  {
+    "SubSource_subtype": [
+      {
+        "_": "27",
+        "$": {
+          "value": "environmental-sample"
+        }
+      }
+    ],
+    "SubSource_name": [
+      ""
+    ]
+  }
+]

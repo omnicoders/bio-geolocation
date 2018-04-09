@@ -1,0 +1,201 @@
+{
+  "BioSource_org": [
+    {
+      "Org-ref": [
+        {
+          "Org-ref_taxname": [
+            "uncultured Suillus"
+          ],
+          "Org-ref_db": [
+            {
+              "Dbtag": [
+                {
+                  "Dbtag_db": [
+                    "taxon"
+                  ],
+                  "Dbtag_tag": [
+                    {
+                      "Object-id": [
+                        {
+                          "Object-id_id": [
+                            "450326"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "Org-ref_orgname": [
+            {
+              "OrgName": [
+                {
+                  "OrgName_name": [
+                    {
+                      "OrgName_name_partial": [
+                        {
+                          "PartialOrgName": [
+                            {
+                              "TaxElement": [
+                                {
+                                  "TaxElement_fixed-level": [
+                                    {
+                                      "_": "0",
+                                      "$": {
+                                        "value": "other"
+                                      }
+                                    }
+                                  ],
+                                  "TaxElement_level": [
+                                    "species"
+                                  ],
+                                  "TaxElement_name": [
+                                    "uncultured Suillus"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "OrgName_mod": [
+                    {
+                      "OrgMod": [
+                        {
+                          "OrgMod_subtype": [
+                            {
+                              "_": "21",
+                              "$": {
+                                "value": "nat-host"
+                              }
+                            }
+                          ],
+                          "OrgMod_subname": [
+                            "Pyrola media"
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "OrgName_lineage": [
+                    "Eukaryota; Fungi; Dikarya; Basidiomycota; Agaricomycotina; Agaricomycetes; Agaricomycetidae; Boletales; Suillineae; Suillaceae; environmental samples"
+                  ],
+                  "OrgName_gcode": [
+                    "1"
+                  ],
+                  "OrgName_mgcode": [
+                    "4"
+                  ],
+                  "OrgName_div": [
+                    "ENV"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "BioSource_subtype": [
+    {
+      "SubSource": [
+        {
+          "SubSource_subtype": [
+            {
+              "_": "3",
+              "$": {
+                "value": "clone"
+              }
+            }
+          ],
+          "SubSource_name": [
+            "6.17"
+          ]
+        },
+        {
+          "SubSource_subtype": [
+            {
+              "_": "23",
+              "$": {
+                "value": "country"
+              }
+            }
+          ],
+          "SubSource_name": [
+            "United Kingdom:Scotland, Grantown on Spey - Anagach Woods"
+          ]
+        },
+        {
+          "SubSource_subtype": [
+            {
+              "_": "27",
+              "$": {
+                "value": "environmental-sample"
+              }
+            }
+          ],
+          "SubSource_name": [
+            ""
+          ]
+        },
+        {
+          "SubSource_subtype": [
+            {
+              "_": "28",
+              "$": {
+                "value": "isolation-source"
+              }
+            }
+          ],
+          "SubSource_name": [
+            "host roots"
+          ]
+        },
+        {
+          "SubSource_subtype": [
+            {
+              "_": "29",
+              "$": {
+                "value": "lat-lon"
+              }
+            }
+          ],
+          "SubSource_name": [
+            "57.19 N 3.37 W"
+          ]
+        },
+        {
+          "SubSource_subtype": [
+            {
+              "_": "30",
+              "$": {
+                "value": "collection-date"
+              }
+            }
+          ],
+          "SubSource_name": [
+            "May-2008"
+          ]
+        },
+        {
+          "SubSource_subtype": [
+            {
+              "_": "31",
+              "$": {
+                "value": "collected-by"
+              }
+            }
+          ],
+          "SubSource_name": [
+            "Tenna Toftegaard"
+          ]
+        }
+      ]
+    }
+  ]
+}

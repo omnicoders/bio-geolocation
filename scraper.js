@@ -4,9 +4,8 @@ const axios    = require('axios');
 const inquirer = require('inquirer');
 const clear    = require('clear');
 const colors   = require('colors');
-//const cheerio  = require('cheerio');
-const xpath    = require('xpath')
-const dom      = require('xmldom').DOMParser
+const convert  = require('xml-to-json-promise');
+
 // Add debugger
 // eval(pry.it) to pause execution
 // https://github.com/blainesch/pry.js
@@ -42,12 +41,23 @@ async function scrapeRecords() {
 	try {
 		let config = await askConfigQuestions();
 		let srcJsonArray = convertFastaFileToJSON(config.srcFilePath);
+		let resultFastaArray = [];
+		let fastaFileString = "";
 		for(let i = 0; i < srcJsonArray.length; i++){
 			let record = srcJsonArray[i];
-			console.log(`scraping ${i + 1}/${srcJsonArray.length} - ${record.assession}`);
-			let country = await getCountry(record.assession);
+			console.log(`fetching record ${i + 1}/${srcJsonArray.length} from GenBank`);
+			let country = await getCountry(record.assession) || "No Location Provided";
+			record['country'] = country;
+			let fastaRecord = `>${record.assession}.${record.version} ${record.name} ${record.country}`;
+			for(let j = 0; j < record.sequence.length; j++){
+				fastaRecord += `\n${record.sequence[j]}`;
+			}
+			resultFastaArray.push(fastaRecord);
 		}
-		//console.log(srcJsonArray[1]);
+		for(let k = 0; k < resultFastaArray.length; k++){
+			fastaFileString += '\r\n' + resultFastaArray[k];
+		}
+		fs.writeFileSync(config.destFilePath, fastaFileString);
 		return "Done!";
 	} catch(error) {
 		console.log("scrapeRecords():" + error);
@@ -141,21 +151,30 @@ function convertFastaFileToJSON(srcFilePath){
 
 async function getCountry(assession) {
 	try {
+		
+		// set the url to the api
+		// return type json returns xml?!
 		let url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=${assession}&rettype=json`;
+		
+		// call the api
 		let response = await axios.get(url);
+		
+		// set the response data to variable
 		let xml = response.data;
+
 		//console.log(`scraping ${assession} complete`);
 		//console.log(`converting xml response to JSON...`);
 		
-		// XML Conversion
-		const convert = require('xml-to-json-promise');
+		// convert xml to json
 		let convertedData = await convert.xmlDataToJSON(xml);
+		
 		//console.log(convertedData);
 
-		/* TODO: Parse For Country */
+		// the api returns two types of structure
 		let isSingleFormat = false;
 		let isSetFormat    = false;
 
+		// determine format
 		if(
 			convertedData['Bioseq-set'] &&
 			convertedData['Bioseq-set']['Bioseq-set_seq-set'] &&
@@ -180,15 +199,60 @@ async function getCountry(assession) {
 			console.log('Error: Unsupported Response Format');
 		}
 
+		/* traverse by format type */
+		let sequenceEntry = convertedData['Bioseq-set']['Bioseq-set_seq-set'][0]['Seq-entry'][0];
+		let bioSequence;
+		let sequenceDescriptionArray;
+		let bioSource;
+		let subSourceArray;
+		let country = null;
+
 		if(isSingleFormat) {
-			console.log(`${assession} is single format`);
+
+			bioSequence = sequenceEntry['Seq-entry_seq'][0]['Bioseq'][0];
+			
 		} else if(isSetFormat) {
-			console.log(`${assession} is set format`);
+	
+			bioSequence = sequenceEntry['Seq-entry_set'][0]['Bioseq-set'][0]['Bioseq-set_seq-set'][0]['Seq-entry'][0]['Seq-entry_seq'][0]['Bioseq'][0];
+
+		}
+		
+		sequenceDescriptionArray = bioSequence['Bioseq_descr'][0]['Seq-descr'][0]['Seqdesc'];
+
+		bioSource = getBioSourceFromDescriptionArray(sequenceDescriptionArray);
+		subSourceArray = bioSource['BioSource_subtype'][0]['SubSource'];
+		
+		for(let i = 0; i < subSourceArray.length; i++){
+			let subSource = subSourceArray[i];
+			let value = subSource['SubSource_subtype'][0]['$']['value'];
+	
+			if(String(value) == 'country'){
+				country = subSource['SubSource_name'][0];
+				return country;
+			}
 		}
 
+		// if not located return null;
+		return country;
 	} catch(error) {
 		//console.log(error);
 		return null;
 	}
 }
+
+function getBioSourceFromDescriptionArray(descArray) {
+	for(let i = 0; i < descArray.length; i++){
+		let desc = descArray[i];
+		let descKeys = Object.keys(desc);
+		for(let j = 0; j < descKeys.length; j++){
+			let key = descKeys[j];
+			//console.log(key);
+			if(String(key) == 'Seqdesc_source'){
+				//console.log(key);
+				return desc['Seqdesc_source'][0]['BioSource'][0];
+			}
+		}
+	}
+	return null;
+} 	
 
