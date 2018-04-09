@@ -7,7 +7,7 @@ const pry = require('pryjs');
 
 describe('#fasta', function() {
     it('should convert fasta files', function() {
-        var result = fasta('./examples/singlesample.fas');
+        var result = fasta('./examples/singlesample.fa');
         expect(result[0]['name']).to.equal('Suillus variegatus');
         expect(result[0]['assession']).to.equal('JQ711926');
         expect(result).to.be.a('array');
