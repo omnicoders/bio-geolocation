@@ -1,5 +1,9 @@
 // load module dependencies
 const fs       = require('fs');
+// Concurrency
+// Helper functions for dealing with concurrent requests.
+// axios.all(iterable)
+// axios.spread(callback)
 const axios    = require('axios');
 const inquirer = require('inquirer');
 const clear    = require('clear');
