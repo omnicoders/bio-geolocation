@@ -1,8 +1,8 @@
 {
   "name": "bio-geolocation",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Parses Fasta file and pulls data from GenBank",
-  "main": "scrape.js",
+  "main": "scraper.js",
   "scripts": {
     "test": "mocha --reporter spec",
     "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"

@@ -30,7 +30,7 @@ npm install
 
 ## Usage
 ```
-    node scrape.js ./fasta/suillus.fas ./output.json
+    node scraper
 ```
 
 ## Code Usage

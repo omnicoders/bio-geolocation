@@ -97,7 +97,7 @@ async function askConfigQuestions() {
 // name says it all
 function convertFastaFileToJSON(srcFilePath){
 	console.log('converting fasta source file to json...');
-	
+
 	// read file from path entered on prompt
 	const srcFile = fs.readFileSync(srcFilePath, "utf8");
 	
@@ -107,6 +107,7 @@ function convertFastaFileToJSON(srcFilePath){
 	// easy record split
 	let srcArray = srcFile.split('>');
 	
+
 	// loop through records, 
 	// convert to json
 	// populate result array
@@ -116,13 +117,27 @@ function convertFastaFileToJSON(srcFilePath){
 		if(record.length > 0) {
 			// get assession
 			let assession = record.split('.')[0].trim();
-			
+
+			// if(
+			// 	assession == 'FJ475559' || assession == 'FN565360' || assession == 'FN565362'
+			// ){
+			// 	//console.log('\n\nNot Working:\n' + srcArray[i] + '\n\n');
+			// 	//fs.writeFileSync('./notworking.json', JSON.stringify(record, null, '  '));
+			// } else {
+			// 	//fs.writeFileSync('./works.json', JSON.stringify(record, null, '  '));	
+			// }
+
 			// get version
 			let version = record.split('.').length > 1 ? String(record.split('.')[1])[0] : 0;
-
 			
 			// split by new line gives us sequence on all lines but the first
 			let recordLineArray = record.split('\n');
+
+			// if(
+			// 	assession == 'FJ475559' || assession == 'FN565360' || assession == 'FN565362'
+			// ){
+			// 	console.log(recordLineArray)
+			// }
 			
 			// the first line has our name in the same 
 			// array index every time if we split by space
@@ -132,7 +147,9 @@ function convertFastaFileToJSON(srcFilePath){
 			// sequence array we will populate line by line to match destination write to source format
 			let sequence = [];
 
+
 			// loop over lines and populate sequence
+			/* WORK IN PROGRESS */
 			for(let j = 1; j < (recordLineArray.length - 1); j++){
 				sequence.push(recordLineArray[j]);
 			}
@@ -145,12 +162,21 @@ function convertFastaFileToJSON(srcFilePath){
 				sequence: sequence
 			};
 
+			// if(
+			// 	assession == 'FJ475559' || assession == 'FN565360' || assession == 'FN565362'
+			// ){
+			// 	console.log(convertedRecord)
+			// }
+
 			// add our converted record to result array
 			convertedSrcArray.push(convertedRecord);			 
 		}	
 	}
   console.log('converting fasta source complete');
-	return convertedSrcArray;
+
+	//fs.writeFileSync('./convertedSrc.json', JSON.stringify(convertedSrcArray, null, '  '));
+	
+	return convertedSrcArray;                                                                                                                                                        
 }
 
 async function getCountry(assession) {
