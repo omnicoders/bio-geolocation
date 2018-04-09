@@ -30,7 +30,7 @@ npm install
 
 ## Usage
 ```
-    node scraper
+node scraper
 ```
 
 ## Code Usage
