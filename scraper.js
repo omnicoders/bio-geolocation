@@ -96,7 +96,7 @@ async function askConfigQuestions() {
 
 // name says it all
 function convertFastaFileToJSON(srcFilePath){
-	console.log('converting fasta source file to json...');
+	console.log('lickity split converting fasta source file to json...');
 
 	// read file from path entered on prompt
 	const srcFile = fs.readFileSync(srcFilePath, "utf8");
